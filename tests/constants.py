@@ -1,0 +1,31 @@
+BIBLE_NAME_ARG_TEST = "kj"
+BIBLE_NAME_ARG_TEST_ERROR = "unknown"
+
+BOOK_KEY_TEST = "genesis"
+BOOK_KEY_TEST_ERROR = "paul"
+
+OT_SIZE_TEST = 39
+OT_FIRST_BOOK_TITLE_TEST = "Genesis"
+OT_LAST_BOOK_TITLE_TEST = "Malachi"
+
+NT_SIZE_TEST = 27
+NT_FIRST_BOOK_TITLE_TEST = "Matthew"
+NT_LAST_BOOK_TITLE_TEST = "Revelation"
+
+POS_TEST = 0
+POS_TEST_ERROR = 100
+
+BIBLE_SIZE_TEST = 66
+BIBLE_NAME_TEST = "King James Bible"
+
+BOOK_SIZE_TEST = 50
+BOOK_NAME_TEST = "Genesis by Moses"
+
+CHAPTER_SIZE_TEST = 31
+CHAPTER_NAME_TEST = "Chapter 1"
+
+VERSE_SIZE_TEST = 54
+VERSE_TEXT_TEST = "In the beginning God created the heaven and the earth."
+
+FIRST_POSITION = 0
+LAST_POSITION = -1
