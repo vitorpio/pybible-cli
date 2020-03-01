@@ -38,12 +38,14 @@ def process_arguments(parser: argparse.ArgumentParser):
         else:
             references = [Reference(verse.text, book.title, chapter.number, verse.number) for book in bible.ot()
                           for chapter in book.chapters for verse in chapter.verses]
+
     elif args.new_testament:
         if args.size:
             return f"The new testament has {len(bible.nt())} books"
         else:
             references = [Reference(verse.text, book.title, chapter.number, verse.number) for book in bible.nt()
                           for chapter in book.chapters for verse in chapter.verses]
+
     elif args.book:
         book = bible[args.book]
         if args.size:
@@ -51,6 +53,7 @@ def process_arguments(parser: argparse.ArgumentParser):
         else:
             references = [Reference(verse.text, book.title, chapter.number, verse.number)
                           for chapter in book.chapters for verse in chapter.verses]
+
     elif args.chapter:
         book = bible[args.chapter[0]]
         chapter = book[cast_integer_argument(parser, args.chapter[1], "--chapter", "CHAPTER_NUMBER")]
@@ -58,6 +61,7 @@ def process_arguments(parser: argparse.ArgumentParser):
             return f"Chapter {chapter.number} of {book.title} has {len(chapter)} verses"
         else:
             references = [Reference(verse.text, book.title, chapter.number, verse.number) for verse in chapter.verses]
+
     elif args.verse:
         book = bible[args.verse[0]]
         chapter = book[cast_integer_argument(parser, args.verse[1], "--verse", "CHAPTER_NUMBER")]
@@ -66,6 +70,7 @@ def process_arguments(parser: argparse.ArgumentParser):
             return f"Verse {verse.number} of Chapter {chapter.number} of {book.title} has {len(verse)} characters"
         else:
             references = [Reference(verse.text, book.title, chapter.number, verse.number)]
+
     else:
         if args.size:
             return f"{bible.name} has {len(bible)} books"
@@ -95,7 +100,7 @@ def cast_integer_argument(my_parser: argparse.ArgumentParser, argument: str, arg
 
 
 def print_command_response(response):
-    if type(response) is list:
+    if isinstance(response, list):
         for verse in response:
             print(verse)
     else:
