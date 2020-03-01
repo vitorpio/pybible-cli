@@ -12,7 +12,7 @@ This module is available on Python 3 and above.
 
 The **pybible-cli** is a command line application, named `pybible`. To reference (print on your terminal) verses, chapters, books and even the whole bible simply call the program:
     
-    $ pyblible
+    $ pybible
     In the beginning God created the heaven and the earth.
     ...
     The grace of our Lord Jesus Christ be with you all. Amen.
