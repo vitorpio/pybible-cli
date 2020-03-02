@@ -51,23 +51,29 @@ Reference the fourth verse of the third chapter from the book of John:
 
     $ pybible --verse john 3 4
     Nicodemus saith unto him, How can a man be born when he is old? can he enter the second time into his mother's womb, and be born?
-    
-It is possible to add extra parameters for adding the reference on the output(-r, --reference) and count the size(-s, --size) of what is been referenced.
+
+Get a random verse with the `--qotd` arugmnet:
+
+    $ pybible --motd
+    "And the house which I build is great: for great is our God above all gods." - 2 Chronicles 2:5 (King James Bible)    
+
+It is possible to add extra parameters for adding the reference on the output(`-r`, `--reference`) and count the size(`-s`, `--size`) of what is been referenced.
 
 For help execute:
 
     $ pybible -h
     usage: pybible [-h] [--bible BIBLE]
-               [-ot | -nt | --book BOOK_NAME | --chapter BOOK_NAME CHAPTER_NUMBER | --verse BOOK_NAME CHAPTER_NUMBER VERSE_NUMBER]
-               [-r] [-s]
-
+                   [-ot | -nt | --qotd | --book BOOK_NAME | --chapter BOOK_NAME CHAPTER_NUMBER | --verse BOOK_NAME CHAPTER_NUMBER VERSE_NUMBER]
+                   [-r] [-s]
+    
     Bible reference
-
+    
     optional arguments:
       -h, --help            show this help message and exit
       --bible BIBLE         Bible version to use
       -ot, --old_testament  Reference the old testament
       -nt, --new_testament  Reference the new testament
+      --qotd                Quote a single, random verse
       --book BOOK_NAME      Reference book
       --chapter BOOK_NAME CHAPTER_NUMBER
                             Reference book and chapter
@@ -77,6 +83,7 @@ For help execute:
       -s, --size            Size of bible, book, chapter or vere referenced
     
     ✞
+
 You can also use `pybible-cli` on your on python code for referencing the bible, just import `pybible_load` module from `pybible` package:
 
     >>> from pybible import pybible_load
