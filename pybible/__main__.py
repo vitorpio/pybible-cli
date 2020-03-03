@@ -1,6 +1,7 @@
 import argparse
 import sys
 from pybible import pybible_load
+import random
 from collections import namedtuple
 
 Reference = namedtuple("Reference", ["verse_text", 'book_title', 'chapter_number', 'verse_number'])
@@ -14,6 +15,8 @@ def configure_arg_parser() -> argparse.ArgumentParser:
     reference_group.add_argument("-ot", "--old_testament", help="Reference the old testament",
                                  action="store_true")
     reference_group.add_argument("-nt", "--new_testament", help="Reference the new testament",
+                                 action="store_true")
+    reference_group.add_argument("-qotd", "--qotd", help="Quote a single, random verse",
                                  action="store_true")
     reference_group.add_argument("--book", metavar="BOOK_NAME", help="Reference book")
     reference_group.add_argument("--chapter", metavar=("BOOK_NAME", "CHAPTER_NUMBER"),
@@ -70,6 +73,12 @@ def process_arguments(parser: argparse.ArgumentParser):
             return f"Verse {verse.number} of Chapter {chapter.number} of {book.title} has {len(verse)} characters"
         else:
             references = [Reference(verse.text, book.title, chapter.number, verse.number)]
+
+    elif args.qotd:
+        book = random.choice(bible)
+        chapter = random.choice(book.chapters)
+        verse = random.choice(chapter.verses)
+        references = [Reference(verse.text, book.title, chapter.number, verse.number)]
 
     else:
         if args.size:
