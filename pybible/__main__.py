@@ -16,7 +16,7 @@ def configure_arg_parser() -> argparse.ArgumentParser:
                                  action="store_true")
     reference_group.add_argument("-nt", "--new_testament", help="Reference the new testament",
                                  action="store_true")
-    reference_group.add_argument("--qotd", help="Quote a single, random verse",
+    reference_group.add_argument("-qotd", "--qotd", help="Quote a single, random verse",
                                  action="store_true")
     reference_group.add_argument("--book", metavar="BOOK_NAME", help="Reference book")
     reference_group.add_argument("--chapter", metavar=("BOOK_NAME", "CHAPTER_NUMBER"),
@@ -78,7 +78,7 @@ def process_arguments(parser: argparse.ArgumentParser):
         book = random.choice(bible)
         chapter = random.choice(book.chapters)
         verse = random.choice(chapter.verses)
-        return f"\"{verse.text}\" - {book.title} {chapter.number}:{verse.number} ({bible.name})"
+        return [Reference(verse.text, book.title, chapter.number, verse.number)]
 
     else:
         if args.size:

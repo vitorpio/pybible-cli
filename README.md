@@ -54,7 +54,7 @@ Reference the fourth verse of the third chapter from the book of John:
 
 Get a random verse with the `--qotd` arugmnet:
 
-    $ pybible --motd
+    $ pybible --qotd
     "And the house which I build is great: for great is our God above all gods." - 2 Chronicles 2:5 (King James Bible)    
 
 It is possible to add extra parameters for adding the reference on the output(`-r`, `--reference`) and count the size(`-s`, `--size`) of what is been referenced.
