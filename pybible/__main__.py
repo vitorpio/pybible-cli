@@ -78,7 +78,7 @@ def process_arguments(parser: argparse.ArgumentParser):
         book = random.choice(bible)
         chapter = random.choice(book.chapters)
         verse = random.choice(chapter.verses)
-        return [Reference(verse.text, book.title, chapter.number, verse.number)]
+        references = [Reference(verse.text, book.title, chapter.number, verse.number)]
 
     else:
         if args.size:
