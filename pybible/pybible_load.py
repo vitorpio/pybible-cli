@@ -1,8 +1,11 @@
 import pickle
 import sys
 from pybible.classes.bible import Bible
-from importlib.resources import open_binary
 import pybible.resources.bibles_serialized
+try:
+    from importlib.resources import open_binary
+except ImportError:
+    from importlib_resources import open_binary
 
 
 def load(bible_name: str = "kj") -> Bible:
