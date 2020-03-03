@@ -17,8 +17,10 @@ with open('LICENSE') as f:
         license="MIT License",
         classifiers=[
             "License :: OSI Approved :: MIT License",
-            "Programming Language :: Python",
-            "Programming Language :: Python :: 3"
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.6",
+            "Programming Language :: Python :: 3.7",
+            "Programming Language :: Python :: 3.8",
         ],
         install_requires=["importlib_resources;python_version<'3.7'"],
         packages=find_packages(exclude=("tests",)),
