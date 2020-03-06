@@ -7,7 +7,7 @@ with open('LICENSE') as f:
     LICENSE = f.read()
     setup(
         name="pybible-cli",
-        version="1.1.1",
+        version="1.1.2",
         description="Bible reference CLI application",
         long_description_content_type="text/markdown",
         long_description=README,
@@ -22,7 +22,7 @@ with open('LICENSE') as f:
             "Programming Language :: Python :: 3.7",
             "Programming Language :: Python :: 3.8",
         ],
-        install_requires=["importlib_resources;python_version<'3.7'"],
+        install_requires=["importlib_resources;python_version<'3.7'", 'jsonpickle'],
         packages=find_packages(exclude=("tests",)),
         entry_points={"console_scripts": ["pybible=pybible.__main__:main"]}
     )
