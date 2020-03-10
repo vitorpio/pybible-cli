@@ -24,6 +24,7 @@ with open('LICENSE') as f:
         ],
         install_requires=["importlib_resources;python_version<'3.7'", 'jsonpickle'],
         packages=find_packages(exclude=("tests",)),
+        include_package_data=True,
         entry_points={"console_scripts": ["pybible=pybible.__main__:main"]}
     )
 

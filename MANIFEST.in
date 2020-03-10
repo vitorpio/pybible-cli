@@ -1,0 +1,1 @@
+include pybible/resources/bibles_serialized/*.json
