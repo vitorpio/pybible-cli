@@ -50,15 +50,19 @@ def test_index_book_by_name_error(bible):
 def test_ot(bible):
     ot = bible.ot()
     assert len(ot) == constants.OT_SIZE_TEST
-    assert ot[constants.FIRST_POSITION].title == constants.OT_FIRST_BOOK_TITLE_TEST
-    assert ot[constants.LAST_POSITION].title == constants.OT_LAST_BOOK_TITLE_TEST
+    assert ot[constants.FIRST_POSITION].title \
+        == constants.OT_FIRST_BOOK_TITLE_TEST
+    assert ot[constants.LAST_POSITION].title \
+        == constants.OT_LAST_BOOK_TITLE_TEST
 
 
 def test_nt(bible):
     nt = bible.nt()
     assert len(nt) == constants.NT_SIZE_TEST
-    assert nt[constants.FIRST_POSITION].title == constants.NT_FIRST_BOOK_TITLE_TEST
-    assert nt[constants.LAST_POSITION].title == constants.NT_LAST_BOOK_TITLE_TEST
+    assert nt[constants.FIRST_POSITION].title \
+        == constants.NT_FIRST_BOOK_TITLE_TEST
+    assert nt[constants.LAST_POSITION].title \
+        == constants.NT_LAST_BOOK_TITLE_TEST
 
 
 def test_books_names(bible):

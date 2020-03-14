@@ -5,7 +5,8 @@ from pybible import pybible_load
 
 @pytest.fixture
 def verse():
-    return pybible_load.load()[constants.BOOK_KEY_TEST][constants.POS_TEST][constants.POS_TEST]
+    book = pybible_load.load()[constants.BOOK_KEY_TEST]
+    return book[constants.POS_TEST][constants.POS_TEST]
 
 
 def test_len(verse):

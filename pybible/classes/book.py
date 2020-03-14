@@ -6,7 +6,8 @@ class Book:
     A class used to represent a book from the bible.
     """
 
-    def __init__(self, title: str, full_title: str, author: str, chapters: tuple):
+    def __init__(self, title: str, full_title: str, author: str,
+                 chapters: tuple):
         """
         Initialize a `Book` object.
 
@@ -32,7 +33,8 @@ class Book:
             sys.exit(5)
 
     def __repr__(self):
-        return f'Book(\"{self.title}\", \"{self.full_title}\", \"{self.author}\", {self.chapters})'
+        return f'Book(\"{self.title}\", \"{self.full_title}\", ' \
+               f'\"{self.author}\", {self.chapters})'
 
     def __str__(self):
         return f'{self.title} by {self.author}'

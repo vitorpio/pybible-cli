@@ -12,7 +12,7 @@ class Bible(ABC):
 
         :Parameters:
             - `name`: string with the bible's name.
-            - `language`: string with the language in witch the bible was written.
+            - `language`: language in witch the bible was written.
             - `books`: tuple of books contained in the bible.
         """
         self.__name = name.strip()
