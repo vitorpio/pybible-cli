@@ -22,9 +22,9 @@ with open('LICENSE') as f:
             "Programming Language :: Python :: 3.7",
             "Programming Language :: Python :: 3.8",
         ],
-        install_requires=["importlib_resources;python_version<'3.7'", 'jsonpickle'],
+        install_requires=["importlib_resources;python_version<'3.7'",
+                          'jsonpickle'],
         packages=find_packages(exclude=("tests",)),
         include_package_data=True,
         entry_points={"console_scripts": ["pybible=pybible.__main__:main"]}
     )
-
