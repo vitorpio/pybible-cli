@@ -26,7 +26,7 @@ def load(bible_name: str = "kj", book_name: str = "kj") -> Bible:
         print('Use --help for the available bibles')
         sys.exit(1)
     except FileNotFoundError:
-        available_books = [book.rstrip(JSON_EXT)
+        available_books = [book.replace(JSON_EXT, '')
                            for book in importlib.resources.contents(package)
                            if book.endswith(JSON_EXT)]
         print(f"Book \"{book_name}\" not found")
