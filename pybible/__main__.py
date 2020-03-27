@@ -5,7 +5,8 @@ import random
 from collections import namedtuple
 
 Reference = namedtuple("Reference", ["verse_text", 'book_title',
-                                     'chapter_number', 'verse_number'])
+                                     'chapter_number', 'verse_number',
+                                     'bible_name'])
 
 
 def configure_arg_parser() -> argparse.ArgumentParser:
@@ -48,38 +49,42 @@ def process_arguments(parser: argparse.ArgumentParser):
     args = parser.parse_args()
     bible_arg = args.bible
 
-    bible = pybible_load.load(bible_arg)
-
     if args.old_testament:
+        bible = pybible_load.load(bible_arg)
         if args.size:
             return f"The old testament has {len(bible.ot())} books"
         else:
             references = [Reference(verse.text, book.title, chapter.number,
-                                    verse.number) for book in bible.ot()
+                                    verse.number, bible.name)
+                          for book in bible.ot()
                           for chapter in book.chapters for verse
                           in chapter.verses]
 
     elif args.new_testament:
+        bible = pybible_load.load(bible_arg)
         if args.size:
             return f"The new testament has {len(bible.nt())} books"
         else:
             references = [Reference(verse.text, book.title, chapter.number,
-                                    verse.number) for book in bible.nt()
+                                    verse.number, bible.name)
+                          for book in bible.nt()
                           for chapter in book.chapters for verse
                           in chapter.verses]
 
     elif args.book:
-        book = bible[args.book]
+        bible = pybible_load.load(bible_arg, args.book)
+        book = bible[0]
         if args.size:
             return f"{book.title} has {len(book)} chapters"
         else:
             references = [Reference(verse.text, book.title, chapter.number,
-                                    verse.number)
+                                    verse.number, bible.name)
                           for chapter in book.chapters for verse
                           in chapter.verses]
 
     elif args.chapter:
-        book = bible[args.chapter[0]]
+        bible = pybible_load.load(bible_arg, args.chapter[0])
+        book = bible[0]
         chapter = book[cast_integer_argument(parser, args.chapter[1],
                                              "--chapter", "CHAPTER_NUMBER")]
         if args.size:
@@ -87,10 +92,12 @@ def process_arguments(parser: argparse.ArgumentParser):
                    f"has {len(chapter)} verses"
         else:
             references = [Reference(verse.text, book.title, chapter.number,
-                                    verse.number) for verse in chapter.verses]
+                                    verse.number, bible.name)
+                          for verse in chapter.verses]
 
     elif args.verse:
-        book = bible[args.verse[0]]
+        bible = pybible_load.load(bible_arg, args.verse[0])
+        book = bible[0]
         chapter = book[cast_integer_argument(parser, args.verse[1], "--verse",
                                              "CHAPTER_NUMBER")]
         verse = chapter[cast_integer_argument(parser, args.verse[2], "--verse",
@@ -100,27 +107,31 @@ def process_arguments(parser: argparse.ArgumentParser):
                    f"of {book.title} has {len(verse)} characters"
         else:
             references = [Reference(verse.text, book.title, chapter.number,
-                                    verse.number)]
+                                    verse.number, bible.name)]
 
     elif args.qotd:
+        bible = pybible_load.load(bible_arg)
         book = random.choice(bible)
         chapter = random.choice(book.chapters)
         verse = random.choice(chapter.verses)
         references = [Reference(verse.text, book.title, chapter.number,
-                                verse.number)]
+                                verse.number, bible.name)]
 
     else:
+        bible = pybible_load.load(bible_arg)
         if args.size:
             return f"{bible.name} has {len(bible)} books"
         else:
             references = [Reference(verse.text, book.title, chapter.number,
-                                    verse.number) for book in bible.books
+                                    verse.number, bible.name)
+                          for book in bible.books
                           for chapter in book.chapters for verse
                           in chapter.verses]
 
     if args.reference:
         return [f"{reference.verse_text} - {reference.book_title} "
                 f"{reference.chapter_number}:{reference.verse_number}"
+                f" ({reference.bible_name})"
                 for reference in references]
     else:
         return [f"{reference.verse_text}" for reference in references]
@@ -137,21 +148,18 @@ def cast_integer_argument(my_parser: argparse.ArgumentParser, argument: str,
         my_parser.print_usage()
         print(f"{my_parser.prog}: error: argument {argument_name}: "
               f"{argument_metavar} must be an integer number greater then 0")
-        sys.exit(2)
+        sys.exit(3)
 
 
-def print_command_response(response):
-    if isinstance(response, list):
-        for verse in response:
-            print(verse)
-    else:
-        print(response)
+def output_references(references):
+    for reference in references:
+        print(reference)
 
 
 def main():
     parser = configure_arg_parser()
-    response = process_arguments(parser)
-    print_command_response(response)
+    references = process_arguments(parser)
+    output_references(references)
 
 
 if __name__ == "__main__":

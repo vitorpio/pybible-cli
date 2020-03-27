@@ -47,11 +47,11 @@ class BibleWithoutApocrypha(Bible):
                 return self.books[key]
         except IndexError:
             print(f"Book number {key} not found in {self.name}.")
-            sys.exit(3)
+            sys.exit(4)
         except KeyError:
             print(f"Book \"{key}\" not found in {self.name}.\nAvailable book "
                   f"names for index: {list(self.__book_names.keys())}")
-            sys.exit(4)
+            sys.exit(5)
 
     def __repr__(self):
         return f'BibleWithoutApocrypha(\"{self.name}\", ' \

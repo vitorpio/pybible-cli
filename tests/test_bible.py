@@ -1,20 +1,12 @@
 import pytest
 from . import constants
 from pybible import pybible_load
-from pybible.classes.bible import Bible
-from pybible.classes.bible_without_apocrypha import BibleWithoutApocrypha
 from pybible.classes.book import Book
-from pybible.classes.chapter import Chapter
-from pybible.classes.verse import Verse
 
 
 @pytest.fixture
 def bible():
     return pybible_load.load()
-
-
-def test_init(bible):
-    assert isinstance(eval(repr(bible)), Bible)
 
 
 def test_len(bible):
