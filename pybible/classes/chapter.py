@@ -24,7 +24,7 @@ class Chapter:
         try:
             return self.verses[item]
         except IndexError:
-            print(f"Verse number {item} not found in Chapter {self.number}.")
+            print(f"Verse number {item+1} not found in Chapter {self.number}.")
             sys.exit(7)
 
     def __repr__(self):
