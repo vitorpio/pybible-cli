@@ -1,3 +1,5 @@
+![test](https://github.com/vitorpio/pybible-cli/workflows/test/badge.svg?branch=master)
+
 # Pybible-cli  - Bible reference
 
 The **pybible-cli** is as a basic module for referencing the bible books, chapters and verses. Using the command line is possible to reference the King James Bible (https://www.sacred-texts.com/bib/osrc/index.htm). 
