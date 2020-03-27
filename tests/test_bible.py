@@ -13,10 +13,6 @@ def bible():
     return pybible_load.load()
 
 
-def test_init(bible):
-    assert isinstance(eval(repr(bible)), Bible)
-
-
 def test_len(bible):
     assert len(bible) == constants.BIBLE_SIZE_TEST
 
