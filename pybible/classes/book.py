@@ -29,7 +29,7 @@ class Book:
         try:
             return self.chapters[item]
         except IndexError:
-            print(f"Chapter number {item} not found in {self.title}.")
+            print(f"Chapter number {item+1} not found in {self.title}.")
             sys.exit(6)
 
     def __repr__(self):
