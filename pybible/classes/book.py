@@ -30,7 +30,7 @@ class Book:
             return self.chapters[item]
         except IndexError:
             print(f"Chapter number {item} not found in {self.title}.")
-            sys.exit(5)
+            sys.exit(6)
 
     def __repr__(self):
         return f'Book(\"{self.title}\", \"{self.full_title}\", ' \

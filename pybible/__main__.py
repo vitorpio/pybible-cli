@@ -148,7 +148,7 @@ def cast_integer_argument(my_parser: argparse.ArgumentParser, argument: str,
         my_parser.print_usage()
         print(f"{my_parser.prog}: error: argument {argument_name}: "
               f"{argument_metavar} must be an integer number greater then 0")
-        sys.exit(2)
+        sys.exit(3)
 
 
 def output_references(references):

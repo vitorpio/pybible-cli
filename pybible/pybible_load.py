@@ -9,16 +9,26 @@ except ImportError:
     from importlib_resources import open_text
 
 JSON_EXT = ".json"
+RESOURCES_PACKAGE = 'pybible.resources.bibles_json'
 
 
-def load(bible_name: str = "kj", json_name: str = "kj") -> Bible:
+def load(bible_name: str = "kj", book_name: str = "kj") -> Bible:
     try:
-        bible_package = importlib.import_module(
-            f'pybible.resources.bibles_serialized.{bible_name}')
-        json_file = open_text(bible_package, json_name
-                              + JSON_EXT)
+        package_module = RESOURCES_PACKAGE if bible_name == book_name \
+            else f'{RESOURCES_PACKAGE}.{bible_name}'
+        package = importlib.import_module(package_module)
+
+        json_file = open_text(package, book_name + JSON_EXT)
+
         return jsonpickle.decode(json_file.read())
     except ImportError:
-        print(f"Could not load \"{json_name}\" json file, check if it exists "
-              f"and is structure correctly as described in the docs.")
+        print(f"Bible \"{bible_name}\" not found")
+        print('Use --help for the available bibles')
         sys.exit(1)
+    except FileNotFoundError:
+        available_books = [book.rstrip(JSON_EXT)
+                           for book in importlib.resources.contents(package)
+                           if book.endswith(JSON_EXT)]
+        print(f"Book \"{book_name}\" not found")
+        print(f"Available books for {bible_name} are: {available_books}")
+        sys.exit(2)
