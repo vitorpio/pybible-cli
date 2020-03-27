@@ -1,1 +1,1 @@
-include pybible/resources/bibles_serialized/*.json
+include pybible/resources/bibles_json/*.json
