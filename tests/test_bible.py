@@ -28,17 +28,6 @@ def test_index_book_by_position_error(bible):
         return bible[constants.POS_TEST_ERROR]
 
 
-def test_index_book_by_name(bible):
-    book = bible[constants.BOOK_KEY_TEST]
-    assert isinstance(book, Book)
-    assert str(book) == constants.BOOK_NAME_TEST
-
-
-def test_index_book_by_name_error(bible):
-    with pytest.raises(SystemExit):
-        return bible[constants.BOOK_KEY_TEST_ERROR]
-
-
 def test_ot(bible):
     ot = bible.ot()
     assert len(ot) == constants.OT_SIZE_TEST
@@ -55,7 +44,3 @@ def test_nt(bible):
         == constants.NT_FIRST_BOOK_TITLE_TEST
     assert nt[constants.LAST_POSITION].title \
         == constants.NT_LAST_BOOK_TITLE_TEST
-
-
-def test_books_names(bible):
-    assert len(bible.books_names) == constants.BIBLE_SIZE_TEST
