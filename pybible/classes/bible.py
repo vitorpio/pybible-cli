@@ -1,29 +1,55 @@
-from abc import ABC, abstractmethod
+import sys
 
 
-class Bible(ABC):
+class Bible:
     """
-    A class used to represent a real world bible.
+    A class used to represent a real world bible
+    (not including apocrypha books).
     """
+    OLD_TESTAMENT_BOOKS = 39
+    APOCRYPHA_BOOKS = 7
 
-    def __init__(self, name: str, language: str, books: tuple):
+    def __init__(self, name: str, language: str, books: tuple,
+                 apocrypha_books_included: bool = False):
         """
-        Initialize a `Bible` object.
+        Initialize a `BibleWithoutApocrypha` object.
 
         :Parameters:
             - `name`: string with the bible's name.
-            - `language`: language in witch the bible was written.
-            - `books`: tuple of books contained in the bible.
+            - `language`: string with the language in witch the bible
+            was written.
+            - `books`: tuple of books contained bible
+            (not including apocrypha books).
         """
         self.__name = name.strip()
         self.__language = language.strip()
         self.__books = books
+        self.__ot_last_book = self.OLD_TESTAMENT_BOOKS
+        if apocrypha_books_included:
+            self.__ot_last_book += self.APOCRYPHA_BOOKS
+
+    def __getitem__(self, key):
+        try:
+            return self.books[key]
+        except IndexError:
+            print(f"Book number {key} not found in {self.name}.")
+            sys.exit(4)
+
+    def __repr__(self):
+        return f'BibleWithoutApocrypha(\"{self.name}\", ' \
+               f'\"{self.language}\", {self.books})'
 
     def __len__(self):
         return len(self.books)
 
     def __str__(self):
         return self.name
+
+    def ot(self) -> tuple:
+        return self.books[:self.__ot_last_book]
+
+    def nt(self) -> tuple:
+        return self.books[self.__ot_last_book:]
 
     @property
     def name(self):
@@ -39,23 +65,3 @@ class Bible(ABC):
     def books(self):
         """Tuple of `Book` objects inside the bible."""
         return self.__books
-
-    @abstractmethod
-    def ot(self) -> tuple:
-        """
-        Return the old testament tuple.
-
-        :Return:
-            - Tuple of `Book` objects in the old testament.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def nt(self) -> tuple:
-        """
-        Return the new testament tuple.
-
-        :Return:
-            - Tuple of `Book` objects in the new testament.
-        """
-        raise NotImplementedError
