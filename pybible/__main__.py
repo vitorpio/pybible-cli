@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Bible reference',
                                  epilog="\u271e")
 
 
-def configure_arg_parser() -> argparse.ArgumentParser:
+def configure_arg_parser():
     parser.add_argument("--bible", metavar="BIBLE",
                         help="Bible version to use", choices=["kj"],
                         default="kj")
