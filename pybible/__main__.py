@@ -19,10 +19,10 @@ def configure_arg_parser() -> argparse.ArgumentParser:
 
     reference_group = parser.add_mutually_exclusive_group()
     reference_group.add_argument("-ot", "--old_testament",
-                                 help="Reference the old testament",
+                                 help="Reference the Old Testament",
                                  action="store_true")
     reference_group.add_argument("-nt", "--new_testament",
-                                 help="Reference the new testament",
+                                 help="Reference the New Testament",
                                  action="store_true")
     reference_group.add_argument("-qotd", "--qotd",
                                  help="Quote a single, random verse",
@@ -81,7 +81,7 @@ def process_arguments():
 def process_ot_arguments(args: argparse.Namespace):
     bible = pybible_load.load(args.bible)
     if args.size:
-        yield f"The old testament has {len(bible.ot())} books"
+        yield f"The Old Testament has {len(bible.ot())} books"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
                           verse.number, bible.name)
@@ -94,7 +94,7 @@ def process_ot_arguments(args: argparse.Namespace):
 def process_nt_arguments(args: argparse.Namespace):
     bible = pybible_load.load(args.bible)
     if args.size:
-        yield f"The new testament has {len(bible.nt())} books"
+        yield f"The New Testament has {len(bible.nt())} books"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
                           verse.number, bible.name)
