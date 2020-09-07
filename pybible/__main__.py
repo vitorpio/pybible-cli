@@ -12,30 +12,30 @@ parser = argparse.ArgumentParser(description='Bible reference',
                                  epilog="\u271e")
 
 
-def configure_arg_parser() -> argparse.ArgumentParser:
+def configure_arg_parser():
     parser.add_argument("--bible", metavar="BIBLE",
                         help="Bible version to use", choices=["kj"],
                         default="kj")
 
     reference_group = parser.add_mutually_exclusive_group()
     reference_group.add_argument("-ot", "--old_testament",
-                                 help="Reference the old testament",
+                                 help="Reference the Old Testament",
                                  action="store_true")
     reference_group.add_argument("-nt", "--new_testament",
-                                 help="Reference the new testament",
+                                 help="Reference the New Testament",
                                  action="store_true")
     reference_group.add_argument("-qotd", "--qotd",
                                  help="Quote a single, random verse",
                                  action="store_true")
     reference_group.add_argument("--book", metavar="BOOK_NAME",
-                                 help="Reference book")
+                                 help="Reference a book")
     reference_group.add_argument("--chapter", metavar=("BOOK_NAME",
                                                        "CHAPTER_NUMBER"),
-                                 help="Reference book and chapter", nargs=2)
+                                 help="Reference a book and chapter", nargs=2)
     reference_group.add_argument("--verse", metavar=("BOOK_NAME",
                                                      "CHAPTER_NUMBER",
                                                      "VERSE_NUMBER"),
-                                 help="Reference book, chapter and verse",
+                                 help="Reference a book, chapter and verse",
                                  nargs=3)
 
     options_group = parser.add_mutually_exclusive_group()
@@ -44,7 +44,7 @@ def configure_arg_parser() -> argparse.ArgumentParser:
                                     "reference",
                                action="store_true")
     options_group.add_argument("-s", "--size",
-                               help="Size of bible, book, chapter or vere "
+                               help="Size of the bible, book, chapter or vere "
                                     "referenced",
                                action="store_true")
 
@@ -81,10 +81,10 @@ def process_arguments():
 def process_ot_arguments(args: argparse.Namespace):
     bible = pybible_load.load(args.bible)
     if args.size:
-        yield f"The old testament has {len(bible.ot())} books"
+        yield f"The Old Testament has {len(bible.ot())} books"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
-                          verse.number, bible.name)
+                                    verse.number, bible.name)
                           for book in bible.ot()
                           for chapter in book.chapters for verse
                           in chapter.verses):
@@ -94,10 +94,10 @@ def process_ot_arguments(args: argparse.Namespace):
 def process_nt_arguments(args: argparse.Namespace):
     bible = pybible_load.load(args.bible)
     if args.size:
-        yield f"The new testament has {len(bible.nt())} books"
+        yield f"The New Testament has {len(bible.nt())} books"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
-                          verse.number, bible.name)
+                                    verse.number, bible.name)
                           for book in bible.nt()
                           for chapter in book.chapters for verse
                           in chapter.verses):
@@ -111,7 +111,7 @@ def process_book_arguments(args: argparse.Namespace):
         yield f"{book.title} has {len(book)} chapters"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
-                          verse.number, bible.name)
+                                    verse.number, bible.name)
                           for chapter in book.chapters for verse
                           in chapter.verses):
             yield reference
@@ -124,10 +124,10 @@ def process_chapter_arguments(args: argparse.Namespace):
                                          "--chapter", "CHAPTER_NUMBER")]
     if args.size:
         yield f"Chapter {chapter.number} of {book.title} " \
-               f"has {len(chapter)} verses"
+              f"has {len(chapter)} verses"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
-                          verse.number, bible.name)
+                                    verse.number, bible.name)
                           for verse in chapter.verses):
             yield reference
 
@@ -141,7 +141,7 @@ def process_verse_arguments(args: argparse.Namespace):
                                           "VERSE_NUMBER")]
     if args.size:
         yield f"Verse {verse.number} of Chapter {chapter.number} " \
-               f"of {book.title} has {len(verse)} characters"
+              f"of {book.title} has {len(verse)} characters"
     else:
         yield Reference(verse.text, book.title, chapter.number,
                         verse.number, bible.name)
@@ -162,7 +162,7 @@ def process_bible_arguments(args: argparse.Namespace):
         yield f"{bible.name} has {len(bible)} books"
     else:
         for reference in (Reference(verse.text, book.title, chapter.number,
-                          verse.number, bible.name)
+                                    verse.number, bible.name)
                           for book in bible.books
                           for chapter in book.chapters for verse
                           in chapter.verses):
