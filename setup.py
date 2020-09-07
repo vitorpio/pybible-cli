@@ -7,7 +7,7 @@ with open('LICENSE') as f:
     LICENSE = f.read()
     setup(
         name="pybible-cli",
-        version="1.2.4",
+        version="1.2.5",
         description="Bible reference CLI application",
         long_description_content_type="text/markdown",
         long_description=README,
